@@ -14,7 +14,7 @@ run <- function(dataIn) {
 
   # run source, capture output
   captured <- tryCatch(capture.output({
-    temp <- source(.e$path, local = T)$value
+    temp <- source(file = .e$path, local = TRUE)$value
   }), error = function(err) err)
   unlockBinding(".e", environment())
 
@@ -27,9 +27,9 @@ run <- function(dataIn) {
   .e$out$x <- if (is.null(temp)) {
      ""
   } else {
-    temp
+	temp
   }
-  do.call(toJSON, .e$out)
+  do.call(toString, .e$out)
 
 }
 
